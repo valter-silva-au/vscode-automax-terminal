@@ -1,0 +1,61 @@
+{
+  "name": "automax-terminal",
+  "displayName": "AutoMax Terminal",
+  "description": "Automatically maximize the panel (terminal) when no editors are open, and restore it when you open a file.",
+  "version": "0.1.0",
+  "publisher": "valter-silva-au",
+  "license": "MIT",
+  "author": "Valter Silva",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valter-silva-au/vscode-automax-terminal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/valter-silva-au/vscode-automax-terminal/issues"
+  },
+  "homepage": "https://github.com/valter-silva-au/vscode-automax-terminal#readme",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "terminal",
+    "panel",
+    "maximize",
+    "layout",
+    "editor"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "automaxTerminal.resync",
+        "title": "AutoMax Terminal: Re-sync panel state",
+        "category": "AutoMax Terminal"
+      }
+    ],
+    "configuration": {
+      "title": "AutoMax Terminal",
+      "properties": {
+        "automaxTerminal.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Automatically maximize the panel when no editors are open, and restore it when a file is opened."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "echo \"No build step (plain JS)\"",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.67.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}
