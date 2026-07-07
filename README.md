@@ -13,6 +13,41 @@ VS Code fires an event whenever the set of open editor tabs changes. This extens
 
 It re-checks on tab changes, active-editor changes, and on startup.
 
+## Requirements
+
+- VS Code `1.67.0` or newer (uses the stable `window.tabGroups` API).
+
+## Install
+
+This extension isn't published to the Marketplace — install it from a packaged `.vsix`.
+
+```bash
+# from the extension folder
+npm install                       # pulls in @vscode/vsce (packaging only)
+npx @vscode/vsce package          # produces automax-terminal-<version>.vsix
+code --install-extension automax-terminal-0.1.0.vsix --force
+```
+
+Then **reload VS Code** (Command Palette → **Developer: Reload Window**, or restart it) — the extension activates on startup, so it needs a fresh window.
+
+Verify it's installed:
+
+```bash
+code --list-extensions --show-versions | grep automax
+# valter-silva-au.automax-terminal@0.1.0
+```
+
+> **Note:** installing from a local `.vsix` means the extension **won't auto-update**. See [Updating](#updating).
+
+## Usage
+
+Once installed and reloaded, it just works:
+
+- Close all editor tabs → the panel maximizes.
+- Open any file → the panel restores.
+
+Disable it anytime via the `automaxTerminal.enabled` setting (Settings → search "AutoMax").
+
 ## Settings
 
 | Setting | Default | Description |
@@ -21,7 +56,7 @@ It re-checks on tab changes, active-editor changes, and on startup.
 
 ## Commands
 
-- **AutoMax Terminal: Re-sync panel state** (`automaxTerminal.resync`) — see the caveat below.
+- **AutoMax Terminal: Re-sync panel state** (`automaxTerminal.resync`) — see the [known limitation](#known-limitation) below.
 
 ## Known limitation
 
@@ -34,25 +69,22 @@ If you maximize or restore the panel **by hand** (e.g. via the native shortcut o
 
 The extension will reset its tracking and re-apply the correct layout for your current editor count.
 
-## Install from source
-
-```bash
-# from the extension folder
-npm install            # installs @vscode/vsce (only needed to package)
-npx vsce package       # produces automax-terminal-<version>.vsix
-code --install-extension automax-terminal-0.1.0.vsix
-```
-
-Or, for quick local development, copy/symlink this folder into your VS Code extensions directory:
-
-- Windows: `%USERPROFILE%\.vscode\extensions\automax-terminal`
-- macOS/Linux: `~/.vscode/extensions/automax-terminal`
-
-Then reload the window (**Developer: Reload Window**).
-
 ## Development
 
-The extension is plain JavaScript — no build step. Open the folder in VS Code and press `F5` to launch an Extension Development Host.
+The extension is plain JavaScript — no build step. Open the folder in VS Code and press `F5` to launch an Extension Development Host with the extension loaded.
+
+## Updating
+
+Because it's installed from a local `.vsix`, there's no auto-update. After changing the code:
+
+1. Bump `version` in `package.json` (and add a `CHANGELOG.md` entry).
+2. Repackage and reinstall:
+
+   ```bash
+   npx @vscode/vsce package && code --install-extension automax-terminal-*.vsix --force
+   ```
+
+3. Reload the window.
 
 ## License
 
