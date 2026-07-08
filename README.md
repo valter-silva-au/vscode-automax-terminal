@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/cover.jpg" width="520" alt="AutoMax Terminal — a VS Code extension. The panel maximizes when you close your files, and snaps back when you open one." />
+<img src="assets/cover.jpg" width="760" alt="AutoMax Terminal — a VS Code extension. The panel maximizes when you close your files, and snaps back when you open one." />
 
 <p></p>
 
