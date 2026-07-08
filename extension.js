@@ -15,46 +15,50 @@ function isEnabled() {
 }
 
 function activate(context) {
-  // VS Code only exposes a *toggle* for the maximized panel
-  // (`workbench.action.toggleMaximizedPanel`) and no API to read the current
-  // panel state, so we track it ourselves. If you maximize/restore the panel
-  // by hand this flag can drift — run "AutoMax Terminal: Re-sync panel state"
-  // (with the panel in its normal, non-maximized state) to reconcile.
+  // VS Code exposes the maximized panel only as a *toggle* with no way to read
+  // its state, so we track it ourselves. Closing a file fires several events in
+  // the same tick (onDidChangeTabs + onDidChangeActiveTextEditor); we commit the
+  // intended state *before* awaiting the toggle, and guard against a toggle
+  // already in flight, so a second event can't read a stale value and fire a
+  // cancelling second toggle — which otherwise left the panel un-maximized until
+  // the next unrelated event.
   let maximized = false;
+  let inFlight = false;
 
-  async function toggle() {
-    await vscode.commands.executeCommand('workbench.action.toggleMaximizedPanel');
-  }
+  async function apply() {
+    if (!isEnabled() || inFlight) return;
 
-  async function sync() {
-    if (!isEnabled()) return;
+    const shouldMaximize = countTabs() === 0;
+    if (shouldMaximize === maximized) return; // already in the desired state
 
-    const empty = countTabs() === 0;
-    if (empty && !maximized) {
-      await toggle();
-      maximized = true;
-    } else if (!empty && maximized) {
-      await toggle();
-      maximized = false;
+    maximized = shouldMaximize; // commit intent synchronously, before awaiting
+    inFlight = true;
+    try {
+      await vscode.commands.executeCommand('workbench.action.toggleMaximizedPanel');
+    } finally {
+      inFlight = false;
     }
+
+    // Tabs may have changed while the toggle was in flight — reconcile once.
+    if (isEnabled() && (countTabs() === 0) !== maximized) apply();
   }
 
   context.subscriptions.push(
-    vscode.window.tabGroups.onDidChangeTabs(sync),
-    vscode.window.onDidChangeActiveTextEditor(sync),
+    vscode.window.tabGroups.onDidChangeTabs(() => apply()),
+    vscode.window.onDidChangeActiveTextEditor(() => apply()),
     vscode.workspace.onDidChangeConfiguration((e) => {
-      if (e.affectsConfiguration('automaxTerminal.enabled')) sync();
+      if (e.affectsConfiguration('automaxTerminal.enabled')) apply();
     }),
-    // Recovery for drift: assume the panel is currently in its normal state,
-    // reset tracking, then re-apply the correct layout for the editor count.
+    // Recovery if the panel state drifts (e.g. you toggle it by hand):
+    // put the panel in its normal state, then run this command.
     vscode.commands.registerCommand('automaxTerminal.resync', async () => {
       maximized = false;
-      await sync();
+      await apply();
     })
   );
 
   // Apply the correct layout once the workbench has finished restoring.
-  sync();
+  apply();
 }
 
 function deactivate() {}

@@ -48,7 +48,7 @@ Not on the Marketplace — install from a packaged `.vsix`:
 # from the extension folder
 npm install                       # pulls in @vscode/vsce (packaging only)
 npx @vscode/vsce package          # produces automax-terminal-<version>.vsix
-code --install-extension automax-terminal-0.2.0.vsix --force
+code --install-extension automax-terminal-0.2.1.vsix --force
 ```
 
 Then **reload VS Code** (Command Palette → **Developer: Reload Window**) — the extension activates on startup.
@@ -57,7 +57,7 @@ Verify it landed:
 
 ```bash
 code --list-extensions --show-versions | grep automax
-# valter-silva-au.automax-terminal@0.2.0
+# valter-silva-au.automax-terminal@0.2.1
 ```
 
 > 💡 A local `.vsix` **won't auto-update** — see [Updating](#-updating).

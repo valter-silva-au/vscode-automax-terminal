@@ -2,7 +2,7 @@
   "name": "automax-terminal",
   "displayName": "AutoMax Terminal",
   "description": "Automatically maximize the panel (terminal) when no editors are open, and restore it when you open a file.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "valter-silva-au",
   "license": "MIT",
   "author": "Valter Silva",

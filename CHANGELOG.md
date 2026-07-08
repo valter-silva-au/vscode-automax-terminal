@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1
+
+- Fix: maximize the panel **immediately** when the last file closes. Two events
+  fired in the same tick and each toggled the panel, cancelling out; the state
+  is now committed before awaiting, with an in-flight guard, so a single clean
+  toggle runs.
+
 ## 0.2.0
 
 - Add an extension icon.
