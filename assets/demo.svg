@@ -1,0 +1,91 @@
+<svg width="760" height="300" viewBox="0 0 760 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="When no editor tabs are open the panel is maximized; when a file is open the normal layout is restored.">
+  <defs>
+    <clipPath id="winA"><rect x="48" y="56" width="280" height="172" rx="12"/></clipPath>
+    <clipPath id="winB"><rect x="432" y="56" width="280" height="172" rx="12"/></clipPath>
+  </defs>
+
+  <!-- card -->
+  <rect x="8" y="8" width="744" height="284" rx="20" fill="#0B1120" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <text x="380" y="34" text-anchor="middle" font-family="ui-sans-serif, Segoe UI, Roboto, sans-serif"
+        font-size="11" letter-spacing="2.5" font-weight="600" fill="#475569">HOW IT WORKS</text>
+
+  <!-- ============ STATE A: no tabs -> panel maximized ============ -->
+  <rect x="48" y="56" width="280" height="172" rx="12" fill="#0F1729" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <g clip-path="url(#winA)">
+    <rect x="48" y="56" width="280" height="22" fill="#0B1424"/>
+    <circle cx="66" cy="67" r="3.5" fill="#FB7185"/>
+    <circle cx="78" cy="67" r="3.5" fill="#FBBF24"/>
+    <circle cx="90" cy="67" r="3.5" fill="#34D399"/>
+    <!-- activity bar -->
+    <rect x="48" y="78" width="18" height="150" fill="#0A0F1E"/>
+    <!-- maximized terminal fills the rest -->
+    <rect x="66" y="78" width="262" height="150" fill="#0A101F"/>
+    <g>
+      <path d="M84 96l6 5-6 5" stroke="#22D3EE" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="98" y="97" width="126" height="7" rx="3.5" fill="#334155"/>
+
+      <rect x="84" y="119" width="12" height="7" rx="3.5" fill="#34D399"/>
+      <rect x="102" y="119" width="150" height="7" rx="3.5" fill="#334155"/>
+
+      <rect x="98" y="141" width="92" height="7" rx="3.5" fill="#1E293B"/>
+
+      <rect x="84" y="163" width="12" height="7" rx="3.5" fill="#34D399"/>
+      <rect x="102" y="163" width="112" height="7" rx="3.5" fill="#334155"/>
+
+      <path d="M84 184l6 5-6 5" stroke="#22D3EE" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="98" y="185" width="11" height="7" rx="2" fill="#22D3EE"/>
+    </g>
+  </g>
+
+  <!-- ============ arrow ============ -->
+  <g stroke="#CBD5E1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M346 142H414"/>
+    <path d="M356 134l-10 8 10 8"/>
+    <path d="M404 134l10 8-10 8"/>
+  </g>
+
+  <!-- ============ STATE B: file open -> restored layout ============ -->
+  <rect x="432" y="56" width="280" height="172" rx="12" fill="#0F1729" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <g clip-path="url(#winB)">
+    <rect x="432" y="56" width="280" height="22" fill="#0B1424"/>
+    <circle cx="450" cy="67" r="3.5" fill="#FB7185"/>
+    <circle cx="462" cy="67" r="3.5" fill="#FBBF24"/>
+    <circle cx="474" cy="67" r="3.5" fill="#34D399"/>
+    <!-- activity bar -->
+    <rect x="432" y="78" width="18" height="150" fill="#0A0F1E"/>
+    <!-- editor -->
+    <rect x="450" y="78" width="262" height="102" fill="#0F1729"/>
+    <!-- active tab -->
+    <rect x="454" y="82" width="88" height="20" rx="5" fill="#16213A"/>
+    <rect x="454" y="82" width="88" height="2" fill="#22D3EE"/>
+    <circle cx="466" cy="92" r="3" fill="#60A5FA"/>
+    <rect x="474" y="89" width="46" height="6" rx="3" fill="#64748B"/>
+    <!-- code lines -->
+    <rect x="466" y="114" width="34" height="7" rx="3.5" fill="#A78BFA"/>
+    <rect x="506" y="114" width="54" height="7" rx="3.5" fill="#60A5FA"/>
+
+    <rect x="482" y="132" width="40" height="7" rx="3.5" fill="#475569"/>
+    <rect x="528" y="132" width="74" height="7" rx="3.5" fill="#34D399"/>
+
+    <rect x="482" y="150" width="48" height="7" rx="3.5" fill="#60A5FA"/>
+    <rect x="536" y="150" width="40" height="7" rx="3.5" fill="#475569"/>
+
+    <rect x="466" y="168" width="28" height="7" rx="3.5" fill="#A78BFA"/>
+    <rect x="500" y="168" width="46" height="7" rx="3.5" fill="#FBBF24"/>
+
+    <!-- restored terminal strip -->
+    <line x1="450" y1="180" x2="712" y2="180" stroke="#FFFFFF" stroke-opacity="0.06"/>
+    <rect x="450" y="180" width="262" height="48" fill="#0A101F"/>
+    <rect x="466" y="200" width="12" height="7" rx="3.5" fill="#34D399"/>
+    <rect x="484" y="200" width="120" height="7" rx="3.5" fill="#334155"/>
+    <rect x="610" y="200" width="10" height="7" rx="2" fill="#22D3EE"/>
+  </g>
+
+  <!-- ============ labels ============ -->
+  <g font-family="ui-sans-serif, Segoe UI, Roboto, sans-serif" text-anchor="middle">
+    <text x="188" y="254" font-size="14" font-weight="700" fill="#E2E8F0">No editor tabs open</text>
+    <text x="188" y="273" font-size="12" fill="#7DD3FC">→ panel maximized</text>
+    <text x="572" y="254" font-size="14" font-weight="700" fill="#E2E8F0">A file is open</text>
+    <text x="572" y="273" font-size="12" fill="#7DD3FC">→ layout restored</text>
+  </g>
+</svg>

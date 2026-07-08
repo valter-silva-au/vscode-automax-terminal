@@ -1,83 +1,108 @@
-# AutoMax Terminal
+<div align="center">
 
-A tiny VS Code extension that **automatically maximizes the panel (terminal, problems, output, etc.) when no editors are open**, and **restores it as soon as you open a file**.
+<img src="assets/cover.jpg" width="520" alt="AutoMax Terminal — a VS Code extension. The panel maximizes when you close your files, and snaps back when you open one." />
 
-Handy if you like to work in a maximized terminal but want the editor to take over the moment you open a file — without reaching for a keyboard shortcut every time.
+<p></p>
 
-## How it works
+[![version](https://img.shields.io/github/package-json/v/valter-silva-au/vscode-automax-terminal?style=flat-square&color=6D5EF6&label=version)](https://github.com/valter-silva-au/vscode-automax-terminal/releases)
+[![VS Code](https://img.shields.io/badge/VS_Code-%E2%89%A5_1.67-0EA5C4?style=flat-square&logo=visualstudiocode&logoColor=white)](https://code.visualstudio.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-zero_runtime_deps-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](./extension.js)
+[![license](https://img.shields.io/github/license/valter-silva-au/vscode-automax-terminal?style=flat-square&color=64748B)](./LICENSE)
 
-VS Code fires an event whenever the set of open editor tabs changes. This extension counts the open tabs across all tab groups:
+</div>
+
+<br/>
+
+Work in a big terminal, but let the editor take over the moment you open a file — no keyboard shortcut, no manual toggling.
+
+## ✨ Features
+
+| | |
+| --- | --- |
+| 🖥️ **Auto-maximize** | Panel fills the window whenever there are zero editor tabs. |
+| 🔁 **Auto-restore** | Opening any file brings your normal editor layout right back. |
+| ⚙️ **One setting** | Flip it off anytime with `automaxTerminal.enabled`. |
+| 🩹 **Self-heal** | A `resync` command recovers if you toggle the panel by hand. |
+| 🪶 **Featherweight** | ~60 lines of plain JS, zero runtime dependencies. |
+
+## 🎬 How it works
+
+<div align="center">
+  <img src="assets/demo.png" width="760" alt="When no editor tabs are open the panel is maximized; when a file is open the normal layout is restored." />
+</div>
+
+The extension counts open editor tabs across all tab groups and reacts on every tab change, active-editor change, and at startup:
 
 - **0 tabs open** → maximize the panel (`workbench.action.toggleMaximizedPanel`)
 - **≥1 tab open** → restore the panel
 
-It re-checks on tab changes, active-editor changes, and on startup.
-
-## Requirements
+## 📦 Requirements
 
 - VS Code `1.67.0` or newer (uses the stable `window.tabGroups` API).
 
-## Install
+## 🚀 Install
 
-This extension isn't published to the Marketplace — install it from a packaged `.vsix`.
+Not on the Marketplace — install from a packaged `.vsix`:
 
 ```bash
 # from the extension folder
 npm install                       # pulls in @vscode/vsce (packaging only)
 npx @vscode/vsce package          # produces automax-terminal-<version>.vsix
-code --install-extension automax-terminal-0.1.0.vsix --force
+code --install-extension automax-terminal-0.2.0.vsix --force
 ```
 
-Then **reload VS Code** (Command Palette → **Developer: Reload Window**, or restart it) — the extension activates on startup, so it needs a fresh window.
+Then **reload VS Code** (Command Palette → **Developer: Reload Window**) — the extension activates on startup.
 
-Verify it's installed:
+Verify it landed:
 
 ```bash
 code --list-extensions --show-versions | grep automax
-# valter-silva-au.automax-terminal@0.1.0
+# valter-silva-au.automax-terminal@0.2.0
 ```
 
-> **Note:** installing from a local `.vsix` means the extension **won't auto-update**. See [Updating](#updating).
+> 💡 A local `.vsix` **won't auto-update** — see [Updating](#-updating).
 
-## Usage
+## 🎬 Usage
 
 Once installed and reloaded, it just works:
 
-- Close all editor tabs → the panel maximizes.
-- Open any file → the panel restores.
+- **Close all editor tabs** → the panel maximizes.
+- **Open any file** → the panel restores.
 
-Disable it anytime via the `automaxTerminal.enabled` setting (Settings → search "AutoMax").
+Toggle the behavior via the `automaxTerminal.enabled` setting (Settings → search *"AutoMax"*).
 
-## Settings
+## ⚙️ Settings
 
 | Setting | Default | Description |
 | --- | --- | --- |
 | `automaxTerminal.enabled` | `true` | Automatically maximize the panel when no editors are open, and restore it when a file is opened. |
 
-## Commands
+## 🎛️ Commands
 
-- **AutoMax Terminal: Re-sync panel state** (`automaxTerminal.resync`) — see the [known limitation](#known-limitation) below.
+| Command | ID | What it does |
+| --- | --- | --- |
+| **AutoMax Terminal: Re-sync panel state** | `automaxTerminal.resync` | Reconciles tracking if the panel state has drifted — see below. |
 
-## Known limitation
+## ⚠️ Known limitation
 
 VS Code exposes the maximized panel only as a **toggle** (`workbench.action.toggleMaximizedPanel`) and gives extensions **no way to read** whether the panel is currently maximized. So the extension tracks that state internally.
 
-If you maximize or restore the panel **by hand** (e.g. via the native shortcut or the panel's `···` menu), the internal tracking can drift and the extension may do the opposite of what you expect on the next tab change. To fix it:
+If you maximize or restore the panel **by hand** (native shortcut or the panel's `···` menu), the internal tracking can drift and the extension may do the opposite of what you expect on the next tab change. To fix it:
 
 1. Put the panel back in its **normal (non-maximized)** state.
 2. Run **AutoMax Terminal: Re-sync panel state** from the Command Palette.
 
-The extension will reset its tracking and re-apply the correct layout for your current editor count.
+It resets tracking and re-applies the correct layout for your current editor count.
 
-## Development
+## 🛠️ Development
 
-The extension is plain JavaScript — no build step. Open the folder in VS Code and press `F5` to launch an Extension Development Host with the extension loaded.
+Plain JavaScript, no build step. Open the folder in VS Code and press <kbd>F5</kbd> to launch an Extension Development Host with the extension loaded.
 
-## Updating
+## 🔄 Updating
 
 Because it's installed from a local `.vsix`, there's no auto-update. After changing the code:
 
-1. Bump `version` in `package.json` (and add a `CHANGELOG.md` entry).
+1. Bump `version` in `package.json` and add a `CHANGELOG.md` entry.
 2. Repackage and reinstall:
 
    ```bash
@@ -86,6 +111,6 @@ Because it's installed from a local `.vsix`, there's no auto-update. After chang
 
 3. Reload the window.
 
-## License
+## 📄 License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © Valter Silva

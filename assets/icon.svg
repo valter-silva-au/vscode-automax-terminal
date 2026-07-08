@@ -1,0 +1,38 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="6" x2="118" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6D5EF6"/>
+      <stop offset="1" stop-color="#0EA5C4"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="28" y1="34" x2="100" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#131C31"/>
+      <stop offset="1" stop-color="#0A0F1E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- tile -->
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+
+  <!-- terminal window -->
+  <rect x="28" y="34" width="72" height="62" rx="12" fill="url(#screen)"
+        stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="1.5"/>
+
+  <!-- traffic lights -->
+  <circle cx="41" cy="46" r="3" fill="#FB7185"/>
+  <circle cx="52" cy="46" r="3" fill="#FBBF24"/>
+  <circle cx="63" cy="46" r="3" fill="#34D399"/>
+
+  <!-- prompt: chevron + cursor -->
+  <path d="M40 64l9 7-9 7" stroke="#22D3EE" stroke-width="5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="55" y="73" width="17" height="5.5" rx="2.75" fill="#CBD5E1"/>
+
+  <!-- maximize frame brackets -->
+  <g stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="5"
+     stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M28 15h-9v9"/>
+    <path d="M100 15h9v9"/>
+    <path d="M28 113h-9v-9"/>
+    <path d="M100 113h9v-9"/>
+  </g>
+</svg>

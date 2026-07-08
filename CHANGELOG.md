@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Add an extension icon.
+- Modernized README (logo, badges, feature grid, before/after diagram).
+- No functional changes to the extension behavior.
+
 ## 0.1.0
 
 - Initial release.

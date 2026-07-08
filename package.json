@@ -2,10 +2,11 @@
   "name": "automax-terminal",
   "displayName": "AutoMax Terminal",
   "description": "Automatically maximize the panel (terminal) when no editors are open, and restore it when you open a file.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "valter-silva-au",
   "license": "MIT",
   "author": "Valter Silva",
+  "icon": "assets/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/valter-silva-au/vscode-automax-terminal.git"
